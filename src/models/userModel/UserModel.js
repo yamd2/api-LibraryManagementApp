@@ -21,7 +21,7 @@ export const getAnyUser = (filter) => {
 
 // update user, @_id is string and @udpateData is an object
 export const updateUserById = (_id, updateData) => {
-  return UserSchema.findByIdAndUpdate(_id, updateData)
+  return UserSchema.findByIdAndUpdate(_id, updateData, { new: true })
 }
 
 // delete user by _id.

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const transactionSchema = new mongoose.Schema(
   {
@@ -10,7 +10,7 @@ const transactionSchema = new mongoose.Schema(
       isbn: { type: String },
       thumbnail: { type: String },
       title: { type: String },
-      authors: { type: String },
+      author: { type: String },
       year: { type: Number },
     },
     returnDate: {
@@ -20,6 +20,6 @@ const transactionSchema = new mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
-export default mongoose.model("Transaction", transactionSchema);
+export default mongoose.model("Transaction", transactionSchema)
