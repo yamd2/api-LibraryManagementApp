@@ -9,12 +9,10 @@ import {
   updateUserById,
 } from "../models/userModel/UserModel.js"
 
-router.get("/", (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    res.json({
-      status: SUCCESS,
-      message: "todo get user",
-    })
+    const user = await getUserById(req.headers.authorization)
+    res.json(user)
   } catch (error) {
     next(error)
   }
@@ -159,6 +157,27 @@ router.patch("/password-update", async (req, res, next) => {
     return res.json({
       status: "error",
       message: "Please enter the correct current password!",
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
+// Edit user info
+router.patch("/edit-user", async (req, res, next) => {
+  try {
+    const { authorization } = req.headers
+    const updateUser = await updateUserById(authorization, req.body)
+
+    if (updateUser?._id) {
+      return res.json({
+        status: SUCCESS,
+        message: "User info updated successfully!",
+      })
+    }
+    res.json({
+      status: ERROR,
+      message: "Unable to update user information!",
     })
   } catch (error) {
     next(error)
